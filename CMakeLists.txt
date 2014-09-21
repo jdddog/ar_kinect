@@ -29,9 +29,11 @@ set(LIBRARY_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/lib)
 #rosbuild_add_executable(example examples/example.cpp)
 #target_link_libraries(example ${PROJECT_NAME})
 
-include_directories('/usr/local/include/')
+find_package(OpenCV REQUIRED)
+
+include_directories('/usr/local/include/' ${OpenCV_INCLUDE_DIRS})
 link_directories('/usr/local/lib/')
 
 rosbuild_add_executable(ar_kinect  src/ar_kinect.cpp src/object.cpp)
-target_link_libraries(ar_kinect  GLU GL glut ARgsub AR ARMulti ARvideo)
+target_link_libraries(ar_kinect  GLU GL glut ARgsub AR ARMulti ARvideo ${OpenCV_LIBRARIES})
 
